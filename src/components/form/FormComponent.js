@@ -14,8 +14,15 @@ import {
 import { AccountCircle } from "@mui/icons-material";
 import PhoneEnabledIcon from "@mui/icons-material/PhoneEnabled";
 
-const FormComponent = () => {
-  
+const FormComponent = ({info,setInfo,handleFormSubmit}) => {
+    const handleChange = (e) => {
+        e.preventDefault();
+        // const name=e.target.name
+        // const vale=e.target.value
+        const { name, value } = e.target;
+        console.log(name, value);
+        setInfo({ ...info, [name]: value });
+      };
   return (
     <Grid
       textAlign="center"
@@ -38,13 +45,13 @@ const FormComponent = () => {
       </p>
       <h2 className="contact-header">Add Contact</h2>
       <Box style={{ backgroundColor: "white", padding: "20px" }}>
-        <form >
+        <form onSubmit={handleFormSubmit} >
           <Stack spacing={3} direction="column">
             <TextField
               variant="outlined"
               name="username"
-              value={null}
-              onChange={null}
+              value={info.username}
+              onChange={handleChange}
               placeholder="Name"
               InputProps={{
                 startAdornment: (
@@ -57,8 +64,8 @@ const FormComponent = () => {
             <TextField
               variant="outlined"
               name="phoneNumber"
-              value={null}
-              onChange={null}
+              value={info.phoneNumber}
+              onChange={handleChange}
               placeholder="Phone Number"
               InputProps={{
                 startAdornment: (
